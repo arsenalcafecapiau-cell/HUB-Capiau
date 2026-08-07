@@ -38,7 +38,7 @@ module.exports = async function handler(req, res) {
 
     const { data, error } = await supabase
       .from('events')
-      .select('funnel_id, variant, event_type, step, label, href, session_id, referrer, utm_source, created_at')
+      .select('funnel_id, variant, event_type, step, label, href, session_id, visitor_id, referrer, utm_source, created_at')
       .gte('created_at', since)
       .order('created_at', { ascending: true });
 
@@ -109,6 +109,7 @@ module.exports = async function handler(req, res) {
       var s = (sessionMap[row.session_id] = sessionMap[row.session_id] || {
         funnel_id: row.funnel_id,
         variant: row.variant,
+        visitor_id: row.visitor_id,
         source: null,
         events: [],
         firstAt: row.created_at,

@@ -40,11 +40,19 @@
       return v.toString(16);
     });
   }
+  // session_id = uma VISITA (reinicia quando o navegador/aba fecha de vez, sessionStorage)
   var SESSION_KEY = '_fh_sid';
-  var sessionId = localStorage.getItem(SESSION_KEY);
+  var sessionId = sessionStorage.getItem(SESSION_KEY);
   if (!sessionId) {
     sessionId = uuid();
-    localStorage.setItem(SESSION_KEY, sessionId);
+    sessionStorage.setItem(SESSION_KEY, sessionId);
+  }
+  // visitor_id = a PESSOA/aparelho, permanece entre visitas diferentes (localStorage)
+  var VISITOR_KEY = '_fh_vid';
+  var visitorId = localStorage.getItem(VISITOR_KEY);
+  if (!visitorId) {
+    visitorId = uuid();
+    localStorage.setItem(VISITOR_KEY, visitorId);
   }
 
   // ---------- variante A/B ----------
@@ -81,6 +89,7 @@
         funnel_id: FUNNEL_ID,
         variant: variant,
         session_id: sessionId,
+        visitor_id: visitorId,
         url: window.location.href,
         referrer: document.referrer || ''
       },
@@ -153,6 +162,7 @@
         funnel_id: FUNNEL_ID,
         variant: variant,
         session_id: sessionId,
+        visitor_id: visitorId,
         url: window.location.href,
         referrer: document.referrer || '',
         step: lastStepSeen,

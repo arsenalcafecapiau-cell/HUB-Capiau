@@ -103,9 +103,10 @@
   // ---------- pageview automático ----------
   send('pageview');
 
-  // ---------- cliques: automático em qualquer link/botão + eventos manuais marcados ----------
+  // ---------- cliques: automático em qualquer link/botão/accordion + eventos manuais marcados ----------
+  var lastStepSeen = '';
   document.addEventListener('click', function (e) {
-    var el = e.target.closest('a, button, [data-fh-event]');
+    var el = e.target.closest('a, button, summary, [data-fh-event]');
     if (!el) return;
 
     var explicit = el.getAttribute('data-fh-event');
@@ -128,6 +129,7 @@
           var step = entry.target.getAttribute('data-fh-step');
           if (entry.isIntersecting && !seen[step]) {
             seen[step] = true;
+            lastStepSeen = step;
             send('step_view', { step: step });
           }
         });
@@ -138,4 +140,33 @@
       observer.observe(el);
     });
   }
+  // ---------- saiu da página / trocou de aba ----------
+  var pageLoadTime = Date.now();
+  var exitSent = false;
+  function sendExit() {
+    if (exitSent) return;
+    exitSent = true;
+    var seconds = Math.round((Date.now() - pageLoadTime) / 1000);
+    var payload = Object.assign(
+      {
+        event_type: 'saiu_da_pagina',
+        funnel_id: FUNNEL_ID,
+        variant: variant,
+        session_id: sessionId,
+        url: window.location.href,
+        referrer: document.referrer || '',
+        step: lastStepSeen,
+        label: 'ficou ' + seconds + 's na página'
+      },
+      utm
+    );
+    try {
+      var blob = new Blob([JSON.stringify(payload)], { type: 'text/plain' });
+      navigator.sendBeacon(ENDPOINT, blob);
+    } catch (e) {}
+  }
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'hidden') sendExit();
+  });
+  window.addEventListener('pagehide', sendExit);
 })();

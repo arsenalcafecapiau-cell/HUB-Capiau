@@ -88,18 +88,15 @@
       extra || {}
     );
 
-    var body = JSON.stringify(payload);
-    if (navigator.sendBeacon) {
-      var blob = new Blob([body], { type: 'application/json' });
-      navigator.sendBeacon(ENDPOINT, blob);
-    } else {
-      fetch(ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: body,
-        keepalive: true
-      }).catch(function () {});
-    }
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(payload),
+      keepalive: true,
+      mode: 'cors'
+    }).catch(function (err) {
+      console.warn('[funnel-hub] falha ao enviar evento', err);
+    });
   }
   window.fhTrack = send;
 

@@ -25,10 +25,6 @@
         <h1>Café Capiau</h1>
       </div>
       <div class="controls">
-        <label for="site">Site</label>
-        <select id="site">
-          <option value="all">Todos os sites</option>
-        </select>
         <label for="range">Período</label>
         <select id="range">
           <option value="7">Últimos 7 dias</option>
@@ -42,11 +38,15 @@
     <section class="kpis" id="kpis"></section>
 
     <nav class="tabs" id="tabs">
-      <button class="tab-btn active" data-tab="funil">Funil</button>
-      <button class="tab-btn" data-tab="cliques">Cliques</button>
-      <button class="tab-btn" data-tab="origens">Origens</button>
-      <button class="tab-btn" data-tab="jornadas">Jornadas</button>
+      <button class="tab-btn active" data-tab="sites">Sites</button>
+      <button class="tab-btn" data-tab="visitas">Visitas</button>
+      <button class="tab-btn" data-tab="funil">Funil</button>
+      <button class="tab-btn" data-tab="conversao">Conversão</button>
     </nav>
+
+    <div class="filter-chip hidden" id="filterChip">
+      Filtrando por: <b id="filterChipSite"></b> <span id="filterChipClear">✕</span>
+    </div>
 
     <main id="content"></main>
   </div>

@@ -48,6 +48,6 @@ module.exports = async function handler(req, res) {
     return res.status(204).end();
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ error: 'erro ao gravar evento' });
+    return res.status(500).json({ error: 'erro ao gravar evento', detail: err.message });
   }
 };

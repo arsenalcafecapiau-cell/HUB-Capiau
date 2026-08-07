@@ -103,12 +103,19 @@
   // ---------- pageview automático ----------
   send('pageview');
 
-  // ---------- cliques marcados com data-fh-event ----------
+  // ---------- cliques: automático em qualquer link/botão + eventos manuais marcados ----------
   document.addEventListener('click', function (e) {
-    var el = e.target.closest('[data-fh-event]');
-    if (el) {
-      send(el.getAttribute('data-fh-event'), { step: el.getAttribute('data-fh-step') || '' });
-    }
+    var el = e.target.closest('a, button, [data-fh-event]');
+    if (!el) return;
+
+    var explicit = el.getAttribute('data-fh-event');
+    var eventType = explicit || 'click';
+    var stepEl = el.closest('[data-fh-step]');
+    var step = el.getAttribute('data-fh-step') || (stepEl ? stepEl.getAttribute('data-fh-step') : '');
+    var label = (el.innerText || el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 60);
+    var href = el.tagName === 'A' ? el.href : '';
+
+    send(eventType, { step: step, label: label, href: href });
   });
 
   // ---------- seções marcadas com data-fh-step (visualização de etapa) ----------

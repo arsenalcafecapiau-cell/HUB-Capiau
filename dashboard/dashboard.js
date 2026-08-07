@@ -103,6 +103,7 @@
       return matchesSite(s.funnel_id);
     });
     var totalSessions = sessions.length;
+    var uniqueVisitors = new Set(sessions.map(function (s) { return s.visitor_id; })).size;
     var converted = sessions.filter(function (s) {
       return s.events.some(function (ev) { return ev.event_type === 'checkout_click'; });
     }).length;
@@ -113,7 +114,8 @@
 
     kpisEl.innerHTML = '';
     var items = [
-      { label: 'Visitantes', value: totalSessions },
+      { label: 'Visitas', value: totalSessions },
+      { label: 'Visitantes únicos', value: uniqueVisitors },
       { label: 'Conversões', value: converted },
       { label: 'Taxa de conversão', value: rate + '%' },
       { label: 'Principal origem', value: topSource }

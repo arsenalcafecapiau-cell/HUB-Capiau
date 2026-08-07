@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hub de Funis — Café Capiau</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="gate" class="gate">
+    <div class="gate-box">
+      <p class="eyebrow">Hub de Funis</p>
+      <h1>Café Capiau</h1>
+      <input id="password" type="password" placeholder="senha" autocomplete="off" />
+      <button id="enter">Entrar</button>
+      <p id="gate-error" class="error"></p>
+    </div>
+  </div>
+
+  <div id="app" class="app hidden">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Hub de Funis</p>
+        <h1>Café Capiau</h1>
+      </div>
+      <div class="controls">
+        <label for="site">Site</label>
+        <select id="site">
+          <option value="all">Todos os sites</option>
+        </select>
+        <label for="range">Período</label>
+        <select id="range">
+          <option value="7">Últimos 7 dias</option>
+          <option value="30" selected>Últimos 30 dias</option>
+          <option value="90">Últimos 90 dias</option>
+        </select>
+        <button id="refresh">Atualizar</button>
+      </div>
+    </header>
+
+    <section class="kpis" id="kpis"></section>
+
+    <nav class="tabs" id="tabs">
+      <button class="tab-btn active" data-tab="funil">Funil</button>
+      <button class="tab-btn" data-tab="cliques">Cliques</button>
+      <button class="tab-btn" data-tab="origens">Origens</button>
+      <button class="tab-btn" data-tab="jornadas">Jornadas</button>
+    </nav>
+
+    <main id="content"></main>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

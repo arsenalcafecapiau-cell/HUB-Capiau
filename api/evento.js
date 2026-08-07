@@ -35,7 +35,9 @@ module.exports = async function handler(req, res) {
       utm_medium: body.utm_medium || null,
       utm_campaign: body.utm_campaign || null,
       utm_content: body.utm_content || null,
-      utm_term: body.utm_term || null
+      utm_term: body.utm_term || null,
+      label: body.label || null,
+      href: body.href || null
     };
 
     if (!event.event_type || !event.funnel_id || !event.session_id) {

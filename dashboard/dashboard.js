@@ -322,6 +322,7 @@
     if (ev.event_type === 'pageview') return 'Entrou na página';
     if (ev.event_type === 'step_view') return 'Viu a etapa ' + ev.step;
     if (ev.event_type === 'checkout_click') return 'Clicou: ' + (ev.label || 'checkout') + ' (conversão)';
+    if (ev.event_type === 'saiu_da_pagina') return 'Saiu (' + (ev.label || '') + (ev.step ? ', última etapa vista: ' + ev.step : '') + ')';
     return 'Clicou: ' + (ev.label || ev.event_type);
   }
 

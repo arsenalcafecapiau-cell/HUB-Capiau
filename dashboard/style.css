@@ -352,3 +352,84 @@ main {
   }
   .step-count, .step-drop { text-align: left; }
 }
+
+/* ---------- filtro ativo ---------- */
+.filter-chip {
+  margin: 1.25rem min(6vw, 3rem) 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--cream-dim);
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+}
+.filter-chip b { color: var(--caramel); }
+#filterChipClear {
+  cursor: pointer;
+  color: var(--cream-dim);
+  font-weight: 700;
+}
+#filterChipClear:hover { color: var(--red); }
+
+/* ---------- cartões de site ---------- */
+.site-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.site-card {
+  text-align: left;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 1.5rem;
+  cursor: pointer;
+  font-family: var(--font-body);
+  color: var(--cream);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.site-card:hover {
+  border-color: var(--caramel);
+  transform: translateY(-2px);
+}
+.site-card.active {
+  border-color: var(--caramel);
+  background: var(--caramel-soft);
+}
+.site-name {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+.site-metric {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+}
+.site-metric-value {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--caramel);
+}
+.site-metric-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--cream-dim);
+}
+.site-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: var(--cream-dim);
+  padding: 0.25rem 0;
+  border-top: 1px solid var(--line);
+}
+.site-row--muted { color: var(--cream-dim); font-size: 0.76rem; }
+.site-rate { color: var(--caramel); font-weight: 700; }

@@ -73,7 +73,7 @@ module.exports = async function handler(req, res) {
     // ---------- 2) cliques (por site + rótulo) ----------
     var clickMap = {};
     data.forEach(function (row) {
-      if (row.event_type === 'pageview' || row.event_type === 'step_view') return;
+      if (row.event_type === 'pageview' || row.event_type === 'step_view' || row.event_type === 'saiu_da_pagina') return;
       var label = (row.label || row.href || row.event_type || 'clique sem nome').trim();
       var mapKey = row.funnel_id + '|' + label;
       var bucket = (clickMap[mapKey] = clickMap[mapKey] || {

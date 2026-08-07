@@ -37,7 +37,8 @@ module.exports = async function handler(req, res) {
       utm_content: body.utm_content || null,
       utm_term: body.utm_term || null,
       label: body.label || null,
-      href: body.href || null
+      href: body.href || null,
+      visitor_id: body.visitor_id || null
     };
 
     if (!event.event_type || !event.funnel_id || !event.session_id) {
